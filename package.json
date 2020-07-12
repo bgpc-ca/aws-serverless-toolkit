@@ -1,7 +1,7 @@
 {
-  "name": "aws-lambda-toolkit",
+  "name": "aws-serverless-toolkit",
   "version": "1.0.0",
-  "author": "Jeremi Gendron <jeremigendron@hotmail.com>",
+  "author": "Jeremi Gendron <gendronjeremi@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^26.0.4",
