@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["./lib"],
+  "exclude": ["./lib/examples", "__tests__"],
+  "compilerOptions": {
+    "outDir": "./build",
+    "declaration": true,
+    "noEmit": false,
+    "removeComments": false,
+    "sourceMap": false,
+    "target": "ESNext"
+  }
+}
