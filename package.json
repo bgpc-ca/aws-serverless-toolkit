@@ -32,5 +32,8 @@
   },
   "lint-staged": {
     "*.(js|ts)": "eslint --cache --fix"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.713.0"
   }
 }
