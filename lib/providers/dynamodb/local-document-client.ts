@@ -1,6 +1,6 @@
 import { AWSError, Request, DynamoDB } from "aws-sdk";
 
-type TableConfigs = { [key: string]: CfDynamoDBTable };
+export type TableConfigs = { [key: string]: CfDynamoDBTable };
 
 type CfDynamoDBTable = {
   AttributeDefinitions: DynamoDB.AttributeDefinition[];
@@ -23,6 +23,8 @@ type LocalDocumentClientParams = {
   tableConfigs: TableConfigs;
 };
 
+type OneRequired<T, V extends keyof T> = Partial<T> & Pick<T, V>;
+
 export class LocalDocumentClient {
   private tableConfigs: TableConfigs;
   private dynamoDb: DynamoDB;
@@ -38,7 +40,7 @@ export class LocalDocumentClient {
 
   batchGet(
     params: DynamoDB.DocumentClient.BatchGetItemInput,
-  ): Partial<Request<DynamoDB.DocumentClient.BatchGetItemOutput, AWSError>> {
+  ): OneRequired<Request<DynamoDB.DocumentClient.BatchGetItemOutput, AWSError>, "promise"> {
     return {
       promise: async () => {
         await this.createMultipleTables(Object.keys(params.RequestItems));
@@ -47,7 +49,9 @@ export class LocalDocumentClient {
     };
   }
 
-  put(params: DynamoDB.DocumentClient.PutItemInput): Partial<Request<DynamoDB.DocumentClient.PutItemOutput, AWSError>> {
+  put(
+    params: DynamoDB.DocumentClient.PutItemInput,
+  ): OneRequired<Request<DynamoDB.DocumentClient.PutItemOutput, AWSError>, "promise"> {
     return {
       promise: async () => {
         await this.createTable(params.TableName);
@@ -56,7 +60,9 @@ export class LocalDocumentClient {
     };
   }
 
-  get(params: DynamoDB.DocumentClient.GetItemInput): Partial<Request<DynamoDB.DocumentClient.GetItemOutput, AWSError>> {
+  get(
+    params: DynamoDB.DocumentClient.GetItemInput,
+  ): OneRequired<Request<DynamoDB.DocumentClient.GetItemOutput, AWSError>, "promise"> {
     return {
       promise: async () => {
         await this.createTable(params.TableName);
@@ -65,7 +71,9 @@ export class LocalDocumentClient {
     };
   }
 
-  query(params: DynamoDB.DocumentClient.QueryInput): Partial<Request<DynamoDB.DocumentClient.QueryOutput, AWSError>> {
+  query(
+    params: DynamoDB.DocumentClient.QueryInput,
+  ): OneRequired<Request<DynamoDB.DocumentClient.QueryOutput, AWSError>, "promise"> {
     return {
       promise: async () => {
         await this.createTable(params.TableName);
@@ -76,7 +84,7 @@ export class LocalDocumentClient {
 
   update(
     params: DynamoDB.DocumentClient.UpdateItemInput,
-  ): Partial<Request<DynamoDB.DocumentClient.UpdateItemOutput, AWSError>> {
+  ): OneRequired<Request<DynamoDB.DocumentClient.UpdateItemOutput, AWSError>, "promise"> {
     return {
       promise: async () => {
         await this.createTable(params.TableName);
@@ -105,10 +113,11 @@ export class LocalDocumentClient {
     }
 
     await this.dynamoDb
-      .createTable(config)
+      .createTable({ ...config, TableName: tableName })
       .promise()
       .catch((e) => {
-        console.log(e);
+        // Table already created? Don't throw (async functions might end up making synchronized calls to same table)
+        if (e.code !== "ResourceInUseException") throw e;
       });
 
     this.tables[tableName] = true;
