@@ -47,10 +47,8 @@ describe("LocalDocumentClient", () => {
         })
         .promise();
 
-      expect(response.$response.httpResponse.statusCode).toMatch(/2\d{2}/);
-    } catch (e) {
-      expect(e).toBeTruthy();
-    }
+      expect(response.$response.httpResponse.statusCode).toBe(200);
+    } catch (e) {}
   });
 
   it("should be able to retrieve a put item", async () => {

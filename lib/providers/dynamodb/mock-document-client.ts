@@ -1,5 +1,20 @@
+import {
+  BatchGetItemInput,
+  BatchWriteItemInput,
+  DocumentClient,
+  GetItemInput,
+  PutItemInput,
+  DeleteItemInput,
+  QueryInput,
+  ScanInput,
+  TransactGetItemsInput,
+  TransactWriteItemsInput,
+  UpdateItemInput,
+} from "aws-sdk/clients/dynamodb";
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export class MockDocumentClient {
-  batchGet(): { promise: () => Promise<void> } {
+  batchGet(_: BatchGetItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -7,7 +22,7 @@ export class MockDocumentClient {
     };
   }
 
-  delete(): { promise: () => Promise<void> } {
+  batchWrite(_: BatchWriteItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -15,35 +30,70 @@ export class MockDocumentClient {
     };
   }
 
-  query(): { promise: () => Promise<void> } {
+  createSet(
+    _: number[] | string[] | DocumentClient.binaryType[],
+    _2?: DocumentClient.CreateSetOptions | undefined,
+  ): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  scan(): { promise: () => Promise<void> } {
+
+  get(_: GetItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  transactGet(): { promise: () => Promise<void> } {
+
+  put(_: PutItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  transactWrite(): { promise: () => Promise<void> } {
+
+  delete(_: DeleteItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  update(): { promise: () => Promise<void> } {
+
+  query(_: QueryInput): { promise: () => Promise<void> } {
+    return {
+      promise: async function () {
+        return;
+      },
+    };
+  }
+  scan(_: ScanInput): { promise: () => Promise<void> } {
+    return {
+      promise: async function () {
+        return;
+      },
+    };
+  }
+  transactGet(_: TransactGetItemsInput): { promise: () => Promise<void> } {
+    return {
+      promise: async function () {
+        return;
+      },
+    };
+  }
+  transactWrite(_: TransactWriteItemsInput): { promise: () => Promise<void> } {
+    return {
+      promise: async function () {
+        return;
+      },
+    };
+  }
+  update(_: UpdateItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -52,3 +102,5 @@ export class MockDocumentClient {
   }
 }
 export const mockDocumentClient = {};
+
+/* eslint-enable @typescript-eslint/no-unused-vars */
