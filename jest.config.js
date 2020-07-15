@@ -3,4 +3,5 @@ module.exports = {
   testEnvironment: "node",
   collectCoverage: process.env.CI !== undefined,
   coverageDirectory: "coverage",
+  collectCoverageFrom: ["./lib/**"],
 };
