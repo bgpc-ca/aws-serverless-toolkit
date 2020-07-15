@@ -1,8 +1,26 @@
 export type HttpHeaders = { [key: string]: string };
+export type MultiValueHttpHeaders = { [key: string]: string[] };
+type pathParameters = { [key: string]: string };
+type queryStringParameters = { [key: string]: string };
+type multiValueQueryStringParameters = { [key: string]: string[] };
 
 export type ApiGatewayEvent = {
-  headers: HttpHeaders;
-  body: string;
+  resource: string;
+  path: string;
+  httpMethod: string;
+  requestContext: {
+    resourcePath: string;
+    httpMethod: string;
+    path: string;
+  } | null;
+  headers: HttpHeaders | null;
+  multiValueHeaders: MultiValueHttpHeaders | null;
+  queryStringParameters: queryStringParameters | null;
+  multiValueQueryStringParameters: multiValueQueryStringParameters | null;
+  pathParameters: pathParameters | null;
+  stageVariables: string | null;
+  body: string | null;
+  isBase64Encoded: boolean;
 };
 
 export type BaseApiGatewayResponse = {
