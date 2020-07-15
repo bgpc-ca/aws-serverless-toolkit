@@ -23,7 +23,6 @@ describe("MockDocumentClient", () => {
     await Promise.all(
       calls.map(async (call) => {
         expect(await mockDocumentClient[call]().promise()).toBe(undefined);
-        expect(await mockDocumentClient[call]({ any: "value" }).promise()).toBe(undefined);
       }),
     );
   });

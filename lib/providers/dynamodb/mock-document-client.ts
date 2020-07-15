@@ -14,7 +14,7 @@ import {
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export class MockDocumentClient {
-  batchGet(_: BatchGetItemInput): { promise: () => Promise<void> } {
+  batchGet(_?: BatchGetItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -22,7 +22,7 @@ export class MockDocumentClient {
     };
   }
 
-  batchWrite(_: BatchWriteItemInput): { promise: () => Promise<void> } {
+  batchWrite(_?: BatchWriteItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -31,7 +31,7 @@ export class MockDocumentClient {
   }
 
   createSet(
-    _: number[] | string[] | DocumentClient.binaryType[],
+    _?: number[] | string[] | DocumentClient.binaryType[],
     _2?: DocumentClient.CreateSetOptions | undefined,
   ): { promise: () => Promise<void> } {
     return {
@@ -41,7 +41,7 @@ export class MockDocumentClient {
     };
   }
 
-  get(_: GetItemInput): { promise: () => Promise<void> } {
+  get(_?: GetItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -49,7 +49,7 @@ export class MockDocumentClient {
     };
   }
 
-  put(_: PutItemInput): { promise: () => Promise<void> } {
+  put(_?: PutItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -57,7 +57,7 @@ export class MockDocumentClient {
     };
   }
 
-  delete(_: DeleteItemInput): { promise: () => Promise<void> } {
+  delete(_?: DeleteItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -65,35 +65,35 @@ export class MockDocumentClient {
     };
   }
 
-  query(_: QueryInput): { promise: () => Promise<void> } {
+  query(_?: QueryInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  scan(_: ScanInput): { promise: () => Promise<void> } {
+  scan(_?: ScanInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  transactGet(_: TransactGetItemsInput): { promise: () => Promise<void> } {
+  transactGet(_?: TransactGetItemsInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  transactWrite(_: TransactWriteItemsInput): { promise: () => Promise<void> } {
+  transactWrite(_?: TransactWriteItemsInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  update(_: UpdateItemInput): { promise: () => Promise<void> } {
+  update(_?: UpdateItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
