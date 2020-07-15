@@ -1,20 +1,8 @@
-import {
-  BatchGetItemInput,
-  BatchWriteItemInput,
-  DocumentClient,
-  GetItemInput,
-  PutItemInput,
-  DeleteItemInput,
-  QueryInput,
-  ScanInput,
-  TransactGetItemsInput,
-  TransactWriteItemsInput,
-  UpdateItemInput,
-} from "aws-sdk/clients/dynamodb";
+import { DynamoDB } from "aws-sdk";
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export class MockDocumentClient {
-  batchGet(_?: BatchGetItemInput): { promise: () => Promise<void> } {
+  batchGet(_?: DynamoDB.DocumentClient.BatchGetItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -22,7 +10,7 @@ export class MockDocumentClient {
     };
   }
 
-  batchWrite(_?: BatchWriteItemInput): { promise: () => Promise<void> } {
+  batchWrite(_?: DynamoDB.DocumentClient.BatchWriteItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -31,8 +19,8 @@ export class MockDocumentClient {
   }
 
   createSet(
-    _?: number[] | string[] | DocumentClient.binaryType[],
-    _2?: DocumentClient.CreateSetOptions | undefined,
+    _?: number[] | string[] | DynamoDB.DocumentClient.binaryType[],
+    _2?: DynamoDB.DocumentClient.CreateSetOptions | undefined,
   ): { promise: () => Promise<void> } {
     return {
       promise: async function () {
@@ -41,7 +29,7 @@ export class MockDocumentClient {
     };
   }
 
-  get(_?: GetItemInput): { promise: () => Promise<void> } {
+  get(_?: DynamoDB.DocumentClient.GetItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -49,7 +37,7 @@ export class MockDocumentClient {
     };
   }
 
-  put(_?: PutItemInput): { promise: () => Promise<void> } {
+  put(_?: DynamoDB.DocumentClient.PutItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -57,7 +45,7 @@ export class MockDocumentClient {
     };
   }
 
-  delete(_?: DeleteItemInput): { promise: () => Promise<void> } {
+  delete(_?: DynamoDB.DocumentClient.DeleteItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
@@ -65,35 +53,35 @@ export class MockDocumentClient {
     };
   }
 
-  query(_?: QueryInput): { promise: () => Promise<void> } {
+  query(_?: DynamoDB.DocumentClient.QueryInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  scan(_?: ScanInput): { promise: () => Promise<void> } {
+  scan(_?: DynamoDB.DocumentClient.ScanInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  transactGet(_?: TransactGetItemsInput): { promise: () => Promise<void> } {
+  transactGet(_?: DynamoDB.DocumentClient.TransactGetItemsInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  transactWrite(_?: TransactWriteItemsInput): { promise: () => Promise<void> } {
+  transactWrite(_?: DynamoDB.DocumentClient.TransactWriteItemsInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;
       },
     };
   }
-  update(_?: UpdateItemInput): { promise: () => Promise<void> } {
+  update(_?: DynamoDB.DocumentClient.UpdateItemInput): { promise: () => Promise<void> } {
     return {
       promise: async function () {
         return;

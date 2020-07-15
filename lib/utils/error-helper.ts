@@ -8,7 +8,9 @@ export function errorHelper(e: Error | BusinessError): ApiGatewayErrorResponse {
         "Content-Type": "text/plain",
       },
       statusCode: e.statusCode,
-      body: e.body,
+      body: JSON.stringify({
+        error: e.errorData,
+      }),
     };
 
   console.log(e);
@@ -17,6 +19,10 @@ export function errorHelper(e: Error | BusinessError): ApiGatewayErrorResponse {
       "Content-Type": "text/plain",
     },
     statusCode: 500,
-    body: "Internal Server Error",
+    body: JSON.stringify({
+      error: {
+        code: "Internal Server Error",
+      },
+    }),
   };
 }

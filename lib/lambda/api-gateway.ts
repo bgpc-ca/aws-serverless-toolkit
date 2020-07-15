@@ -1,9 +1,9 @@
-import { ApiGatewayResponse, BaseApiGatewaySuccessResponse, ApiGatewayEvent } from "../types";
+import { ApiGatewayResponse, ApiGatewayEvent } from "../types";
 import { errorHelper } from "../utils/error-helper";
 
-export function apiGatewayLambda<S extends BaseApiGatewaySuccessResponse>(
-  main: (event: ApiGatewayEvent) => Promise<ApiGatewayResponse<S>>,
-): (event: ApiGatewayEvent) => Promise<ApiGatewayResponse<S>> {
+export function apiGatewayLambda(
+  main: (event: ApiGatewayEvent) => Promise<ApiGatewayResponse>,
+): (event: ApiGatewayEvent) => Promise<ApiGatewayResponse> {
   return async function (event: ApiGatewayEvent) {
     try {
       return await main(event);

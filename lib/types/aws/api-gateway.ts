@@ -1,3 +1,5 @@
+import { BusinessErrorData } from "../errors";
+
 export type HttpHeaders = { [key: string]: string };
 
 export type ApiGatewayEvent = {
@@ -10,10 +12,6 @@ export type BaseApiGatewayResponse = {
   headers: HttpHeaders;
 };
 
-export type BaseApiGatewaySuccessResponse = BaseApiGatewayResponse & {
-  statusCode: 200;
-};
-
 export type ApiGatewayErrorResponse = BaseApiGatewayResponse & {
   headers: HttpHeaders & {
     "Content-Type": "text/plain";
@@ -21,18 +19,38 @@ export type ApiGatewayErrorResponse = BaseApiGatewayResponse & {
   body: string;
 };
 
-export type ApiGatewayPlainSuccessResponse = BaseApiGatewaySuccessResponse & {
-  headers: HttpHeaders & {
-    "Content-Type": "text/plain";
-  };
-  body: "OK";
-};
-
-export type ApiGatewayJsonSuccessResponse<B = Record<string, any>> = BaseApiGatewaySuccessResponse & {
+export type ApiGatewaySuccessResponse = {
+  statusCode: 200;
   headers: HttpHeaders & {
     "Content-Type": "application/json";
   };
-  body: B;
+  body: string;
 };
 
-export type ApiGatewayResponse<S extends BaseApiGatewaySuccessResponse> = ApiGatewayErrorResponse | S;
+export type ApiGatewayResponse = ApiGatewayErrorResponse | ApiGatewaySuccessResponse;
+
+/**
+ * For each possibly thrown error, E needs to include that error's errorData type as an intersection type
+ */
+export type ApiGatewayBusinessResponseBody<S, E extends BusinessErrorData> =
+  | {
+      payload: S;
+      error: null;
+    }
+  | {
+      payload: null;
+      error: E;
+    };
+
+// type MyBusinessResponseBody = ApiGatewayBusinessResponseBody<
+//   { good: "truetrue" },
+//   | RequireAllPropertiesPassGetAllFailsErrorData<{ key: "value" }>
+//   | RequireAllPropertiesPassThrowAtFirstErrorData<{ key: "value" }>
+// >;
+
+// Axios.post<MyBusinessResponseBody>("").then((res) => {
+//   if (res.data.error)
+//     switch (res.data.error.code) {
+//     }
+//   else res.data.payload.good;
+// });
