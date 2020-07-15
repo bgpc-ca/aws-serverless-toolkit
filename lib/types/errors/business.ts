@@ -1,10 +1,12 @@
-export class BusinessError {
+export class BusinessError<D = void> {
   business = true;
-  constructor(public statusCode: number, public body: string) {}
+  constructor(public statusCode: number, public errorData?: D) {}
 }
 
-export class BadRequestError extends BusinessError {
-  constructor(body: string) {
-    super(400, body);
+export class BadRequestError<D extends BusinessErrorData = BusinessErrorData> extends BusinessError<D> {
+  constructor(errorData: D) {
+    super(400, errorData);
   }
 }
+
+export type BusinessErrorData = { code: string };

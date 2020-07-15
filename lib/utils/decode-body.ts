@@ -5,10 +5,11 @@ import { BadRequestError } from "../types/errors";
  * @throws {BadRequestError("BAD_JSON")}
  * @param body - Event body string which should JSON.parse into <B>
  */
-export function decodeBody<B>(body: string): B {
+export function decodeBody<B>(body: string | null): B {
   try {
+    if (!body) throw new Error();
     return JSON.parse(body);
   } catch (e) {
-    throw new BadRequestError("BAD_JSON");
+    throw new BadRequestError({ code: "BAD_BODY" });
   }
 }
