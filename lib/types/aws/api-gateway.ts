@@ -1,13 +1,14 @@
 import { BusinessErrorData } from "../errors";
 import { Request, Response } from "express";
-
-export type HttpHeaders = { [key: string]: string };
+export type Default = { [key: string]: string };
+export type HttpHeaders = Default;
 export type MultiValueHttpHeaders = { [key: string]: string[] };
 type pathParameters = { [key: string]: string };
 type queryStringParameters = { [key: string]: string };
 type multiValueQueryStringParameters = { [key: string]: string[] };
-export type Default = { [key: string]: string };
-export type BetterRequest = Request<Default, unknown, Default, Default>;
+
+export type QueryType = { [key: string]: string | string[] };
+export type BetterRequest = Request<Default, unknown, Default, QueryType>;
 export type BetterResponse = Response<Default>;
 
 export type ApiGatewayEvent = {
