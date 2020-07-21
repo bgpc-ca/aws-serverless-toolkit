@@ -11,6 +11,7 @@
     "test": "jest",
     "prepack": "yarn build"
   },
+  "files": ["dist/", "lib/"],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "publishConfig": {
