@@ -33,7 +33,7 @@ export type ApiGatewayEvent = {
 export type BaseApiGatewayResponse = {
   statusCode: number;
   headers: HttpHeaders;
-  body: Default;
+  body: string;
 };
 
 export type ApiGatewayErrorResponse = BaseApiGatewayResponse & {

@@ -3,7 +3,7 @@
   "include": ["./lib"],
   "exclude": ["./lib/examples", "__tests__"],
   "compilerOptions": {
-    "outDir": "./build",
+    "outDir": "./dist",
     "declaration": true,
     "noEmit": false,
     "removeComments": false,

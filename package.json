@@ -1,11 +1,17 @@
 {
-  "name": "aws-serverless-toolkit",
-  "version": "1.0.0",
-  "author": "Jeremi Gendron <gendronjeremi@gmail.com>",
+  "name": "@bgpc/aws-serverless-toolkit",
+  "version": "0.0.0",
+  "contributors": ["Jeremi Gendron <gendronjeremi@gmail.com>", "Joseph Sawaya"],
   "license": "MIT",
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
-    "test": "jest"
+    "test": "jest",
+    "prepack": "yarn build"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+  	"access": "public"
   },
   "devDependencies": {
     "@types/express": "^4.17.7",
