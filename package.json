@@ -1,6 +1,6 @@
 {
   "name": "@bgpc/aws-serverless-toolkit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "contributors": [
     "Jeremi Gendron <gendronjeremi@gmail.com>",
     "Joseph Sawaya"
@@ -11,7 +11,10 @@
     "test": "jest",
     "prepack": "yarn build"
   },
-  "files": ["dist/", "lib/"],
+  "files": [
+    "dist/",
+    "lib/"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "publishConfig": {
