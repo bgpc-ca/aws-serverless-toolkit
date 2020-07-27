@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-type SendEmailParams = {
+export type SendEmailParams = {
   Destination: {
     /* required */
     BccAddresses?: string[];

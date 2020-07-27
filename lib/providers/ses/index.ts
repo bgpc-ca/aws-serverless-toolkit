@@ -1,1 +1,1 @@
-export * from "./ses-provider";
+export * from "./ses-local-client";
