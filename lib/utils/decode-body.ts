@@ -7,7 +7,7 @@ export type DecodeBodyErrorData = { code: "BAD_BODY" };
  * @throws {BadRequestError("BAD_BODY")}
  * @param body - Event body string which should JSON.parse into <B>
  */
-export function decodeBody<B>(body: string | null): B {
+export function decodeBody<B>(body: string | null): Partial<B> {
   try {
     if (!body) throw new Error();
     return JSON.parse(body);
