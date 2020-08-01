@@ -51,10 +51,10 @@ export type ApiGatewaySuccessResponse = {
   body: string;
 };
 
-export type ApiGatewayResponse = ApiGatewayErrorResponse | ApiGatewaySuccessResponse;
+export type ApiGatewayResponse = ApiGatewayErrorResponse | ApiGatewaySuccessResponse | void;
 
 /**
- * For each possibly thrown error, E needs to include that error's errorData type as an intersection type
+ * For each possibly thrown error, E needs to include that error's errorData type as a union type
  */
 export type ApiGatewayBusinessResponseBody<S, E extends BusinessErrorData> =
   | {

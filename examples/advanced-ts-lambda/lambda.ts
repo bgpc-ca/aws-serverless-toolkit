@@ -6,29 +6,36 @@ import {
   ApiGatewayBusinessResponseBody,
   Tested,
 } from "../../lib";
-import {
-  RequireAllPropertiesPassThrowAtFirstErrorData,
-  requireAllPropertiesPassThrowAtFirstFail,
-} from "../../lib/utils/body-validation";
+import { Given, given } from "../../lib/utils/body-validation";
 import { decodeBody } from "../../lib/utils/decode-body";
 import { documentClient } from "./documentClient";
 import { success } from "../../lib/utils/success";
 
-export type MyLambdaResponseSuccessBody = {
+/**
+ * What a successful payload contains
+ */
+export type MyLambdaResponseSuccessPayload = {
   id: string;
 };
+
+/**
+ * Imported by the frontend and used to type the second argument of Axios.post<any>
+ */
 export type MyLambdaRequestBody = {
   content: string;
   author: string;
 };
 
-export type MyLambdaPossibleErrorData = RequireAllPropertiesPassThrowAtFirstErrorData<MyLambdaRequestBody>;
+/**
+ * Use union type to encode possible business failure types (|)
+ */
+export type MyLambdaPossibleErrorData = Given<MyLambdaRequestBody>;
 
 /**
  * This type is imported by the frontend and passed to Axios.post<T>
  */
 export type MyLambdaResponseBody = ApiGatewayBusinessResponseBody<
-  MyLambdaResponseSuccessBody,
+  MyLambdaResponseSuccessPayload,
   MyLambdaPossibleErrorData
 >;
 
@@ -44,15 +51,16 @@ const tested: Tested<MyLambdaRequestBody> = {
 /**
  * Write todo to ddb and return generated id.
  * @param event
- * @throws {BadRequestError<RequireAllPropertiesPassThrowAtFirstErrorData<MyLambdaRequestBody>>}
+ * @throws {BadRequestError<Given<MyLambdaRequestBody>>}
+ * @throws {... other possible errors}
  */
-export async function main(event: ApiGatewayEvent): Promise<ApiGatewayResponse | never> {
+export async function main(event: ApiGatewayEvent): Promise<ApiGatewayResponse> {
   const body = decodeBody<MyLambdaRequestBody>(event.body);
-  // below guarantees body is not a partial anymore
-  requireAllPropertiesPassThrowAtFirstFail<MyLambdaRequestBody>(body, tested);
-  const { content, author } = body as MyLambdaRequestBody;
-  const id = await saveTodoToTable({ content, author });
-  return success<MyLambdaResponseSuccessBody>({ id });
+  if (given<MyLambdaRequestBody>(body, tested)) {
+    const { content, author } = body;
+    const id = await saveTodoToTable({ content, author });
+    return success<MyLambdaResponseSuccessPayload>({ id });
+  }
 }
 
 export type PSaveTodoToTable = {
