@@ -46,13 +46,13 @@ const tested: Tested<MyLambdaRequestBody> = {
  * @param event
  * @throws {BadRequestError<RequireAllPropertiesPassThrowAtFirstErrorData<MyLambdaRequestBody>>}
  */
-export async function main(event: ApiGatewayEvent): Promise<ApiGatewayResponse> {
+export async function main(event: ApiGatewayEvent): Promise<ApiGatewayResponse | never> {
   const body = decodeBody<MyLambdaRequestBody>(event.body);
-  if (requireAllPropertiesPassThrowAtFirstFail<MyLambdaRequestBody>(body, tested)) {
-    const { content, author } = body;
-    const id = await saveTodoToTable({ content, author });
-    return success<MyLambdaResponseSuccessBody>({ id });
-  }
+  // below guarantees body is not a partial anymore
+  requireAllPropertiesPassThrowAtFirstFail<MyLambdaRequestBody>(body, tested);
+  const { content, author } = body as MyLambdaRequestBody;
+  const id = await saveTodoToTable({ content, author });
+  return success<MyLambdaResponseSuccessBody>({ id });
 }
 
 export type PSaveTodoToTable = {
