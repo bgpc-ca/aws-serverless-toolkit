@@ -48,10 +48,11 @@ const tested: Tested<MyLambdaRequestBody> = {
  */
 export async function main(event: ApiGatewayEvent): Promise<ApiGatewayResponse> {
   const body = decodeBody<MyLambdaRequestBody>(event.body);
-  requireAllPropertiesPassThrowAtFirstFail<MyLambdaRequestBody>(body, tested);
-  const { content, author } = body;
-  const id = await saveTodoToTable({ content, author });
-  return success<MyLambdaResponseSuccessBody>({ id });
+  if (requireAllPropertiesPassThrowAtFirstFail<MyLambdaRequestBody>(body, tested)) {
+    const { content, author } = body;
+    const id = await saveTodoToTable({ content, author });
+    return success<MyLambdaResponseSuccessBody>({ id });
+  }
 }
 
 export type PSaveTodoToTable = {
