@@ -1,6 +1,6 @@
 {
   "name": "@bgpc/aws-serverless-toolkit",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "contributors": [
     "Jeremi Gendron <gendronjeremi@gmail.com>",
     "Joseph Sawaya"
