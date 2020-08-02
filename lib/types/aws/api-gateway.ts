@@ -30,28 +30,13 @@ export type ApiGatewayEvent = {
   isBase64Encoded: boolean;
 };
 
-export type BaseApiGatewayResponse = {
+export type ApiGatewayResponse = {
   statusCode: number;
-  headers: HttpHeaders;
-  body: string;
-};
-
-export type ApiGatewayErrorResponse = BaseApiGatewayResponse & {
-  headers: HttpHeaders & {
-    "Content-Type": "text/plain";
-  };
-  body: string;
-};
-
-export type ApiGatewaySuccessResponse = {
-  statusCode: 200;
   headers: HttpHeaders & {
     "Content-Type": "application/json";
   };
   body: string;
 };
-
-export type ApiGatewayResponse = ApiGatewayErrorResponse | ApiGatewaySuccessResponse | void;
 
 /**
  * For each possibly thrown error, E needs to include that error's errorData type as a union type

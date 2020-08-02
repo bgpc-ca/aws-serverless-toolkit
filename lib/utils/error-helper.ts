@@ -1,11 +1,12 @@
-import { ApiGatewayErrorResponse } from "../types/aws";
+import { ApiGatewayResponse } from "../types/aws";
 import { BusinessError } from "../types/errors";
+import { internalError } from "./internal-error";
 
-export function errorHelper(e: Error | BusinessError): ApiGatewayErrorResponse {
+export function errorHelper(e: Error | BusinessError): ApiGatewayResponse {
   if ("business" in e)
     return {
       headers: {
-        "Content-Type": "text/plain",
+        "Content-Type": "application/json",
       },
       statusCode: e.statusCode,
       body: JSON.stringify({
@@ -14,15 +15,5 @@ export function errorHelper(e: Error | BusinessError): ApiGatewayErrorResponse {
     };
 
   console.log(e);
-  return {
-    headers: {
-      "Content-Type": "text/plain",
-    },
-    statusCode: 500,
-    body: JSON.stringify({
-      error: {
-        code: "Internal Server Error",
-      },
-    }),
-  };
+  return internalError;
 }

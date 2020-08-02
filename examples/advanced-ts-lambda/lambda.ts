@@ -54,7 +54,7 @@ const tested: Tested<MyLambdaRequestBody> = {
  * @throws {BadRequestError<Given<MyLambdaRequestBody>>}
  * @throws {... other possible errors}
  */
-export async function main(event: ApiGatewayEvent): Promise<ApiGatewayResponse> {
+export async function main(event: ApiGatewayEvent): Promise<ApiGatewayResponse | void> {
   const body = decodeBody<MyLambdaRequestBody>(event.body);
   if (given<MyLambdaRequestBody>(body, tested)) {
     const { content, author } = body;

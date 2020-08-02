@@ -1,6 +1,6 @@
-import { ApiGatewaySuccessResponse } from "../types/aws";
+import { ApiGatewayResponse } from "../types/aws";
 
-export const plainSuccess: ApiGatewaySuccessResponse = {
+export const plainSuccess: ApiGatewayResponse = {
   statusCode: 200,
   headers: {
     "Content-Type": "application/json",

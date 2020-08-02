@@ -2,6 +2,7 @@ import { Tested } from "../types/helpers";
 import { BadRequestError, BusinessErrorData } from "../types/errors";
 
 export type Given<T> = BusinessErrorData & {
+  code: "PROPERTY_FAILS";
   object: Partial<T>;
   FAILED: keyof T;
 };
