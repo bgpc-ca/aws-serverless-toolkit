@@ -19,11 +19,6 @@ jobs:
         node-version: "${{ steps.nvm.outputs.NODE_VERSION }}"
     - name: "Install dependencies"
       run: yarn
-    - uses: actions/setup-java@v1
-      with:
-        java-version: '8.0.261' # The JDK version to make available on the path.
-        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
-        architecture: x64 # (x64 or x86) - defaults to x64
     - name: Hello world action step
       id: hello
       uses: bgpc-ca/dynamodb-local-action@master
