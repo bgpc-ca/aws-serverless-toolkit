@@ -40,11 +40,13 @@ export class ApiGatewayLocalClient {
         const event = this.generateEvent(req, path);
 
         const response = await this.functionMap[path].fn(event);
-        for (const header in response.headers) {
-          res.setHeader(header, response.headers[header]);
+        if (response) {
+          for (const header in response.headers) {
+            res.setHeader(header, response.headers[header]);
+          }
+          if (response.body) res.status(response.statusCode).json(JSON.parse(response.body));
+          else res.status(response.statusCode);
         }
-        if (response.body) res.status(response.statusCode).json(JSON.parse(response.body));
-        else res.status(response.statusCode);
       });
     }
   }

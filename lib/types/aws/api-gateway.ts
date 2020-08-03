@@ -36,7 +36,7 @@ export type ApiGatewayResponse = {
     "Content-Type": "application/json";
   };
   body: string;
-};
+} | void;
 
 /**
  * For each possibly thrown error, E needs to include that error's errorData type as a union type
