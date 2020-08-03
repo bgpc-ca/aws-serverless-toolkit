@@ -19,9 +19,15 @@ jobs:
         node-version: "${{ steps.nvm.outputs.NODE_VERSION }}"
     - name: "Install dependencies"
       run: yarn
-    - name: Hello world action step
-      id: hello
-      uses: bgpc-ca/dynamodb-local-action@master
+    - name: Setup DynamoDB Local
+      uses: rrainn/dynamodb-action@v2.0.0
+      with:
+        dbPath: # undefined by default, if this is undefined inMemory will be used
+        sharedDb: true
+        delayTransientStatuses: # undefined by default
+        optimizeDbBeforeStartup: # undefined by default
+        port: 8000
+        cors: '*'
     - name: "Test"
       run: yarn test
     - name: "Build"
