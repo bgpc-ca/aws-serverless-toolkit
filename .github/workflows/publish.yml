@@ -28,6 +28,13 @@ jobs:
         optimizeDbBeforeStartup: # undefined by default
         port: 8000
         cors: '*'
+    - name: "Dummy credentials"
+      run: |
+        echo '
+        [default]
+        aws_access_key_id = abc123
+        aws_secret_access_key = abc123
+        ' > ~/.aws/credentials
     - name: "Test"
       run: yarn test
     - name: "Build"
