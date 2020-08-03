@@ -1,0 +1,43 @@
+name: npm-publish
+on:
+  push:
+    branches:
+      - master # Change this to your default branch
+jobs:
+  npm-publish:
+    name: npm-publish
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Checkout"
+      uses: actions/checkout@master
+    - name: "Read .nvmrc"
+      run: echo "##[set-output name=NODE_VERSION;]$(cat .nvmrc)"
+      id: nvm
+    - name: "Install node"
+      uses: "actions/setup-node@master"
+      with:
+        node-version: "${{ steps.nvm.outputs.NODE_VERSION }}"
+    - name: "Install dependencies"
+      run: yarn
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '8.0.261' # The JDK version to make available on the path.
+        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
+        architecture: x64 # (x64 or x86) - defaults to x64
+    - name: Hello world action step
+      id: hello
+      uses: bgpc-ca/dynamodb-local-action@master
+    - name: "Test"
+      run: yarn test
+    - name: "Build"
+      run: yarn build
+    - name: Publish if version has been updated
+      uses: pascalgn/npm-publish-action@06e0830ea83eea10ed4a62654eeaedafb8bf50fc
+      with: # All of theses inputs are optional
+        tag_name: "v%s"
+        tag_message: "v%s"
+        commit_pattern: "^Release (\\S+)"
+        workspace: "."
+      env: # More info about the environment variables in the README
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # You need to set this in your repo settings
