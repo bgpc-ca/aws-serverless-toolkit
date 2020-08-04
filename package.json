@@ -1,6 +1,6 @@
 {
   "name": "@bgpc/aws-serverless-toolkit",
-  "version": "1.1.1-rc.2",
+  "version": "1.1.1-rc.2-patch01",
   "contributors": [
     "Jeremi Gendron <gendronjeremi@gmail.com>",
     "Joseph Sawaya"
@@ -33,6 +33,7 @@
     "eslint": "^7.4.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "express": "^4.17.1",
     "husky": "^4.2.5",
     "jest": "^26.1.0",
     "lint-staged": "^10.2.11",
@@ -51,7 +52,6 @@
   },
   "dependencies": {
     "aws-sdk": "^2.713.0",
-    "express": "^4.17.1",
     "uuid": "^8.2.0"
   }
 }
