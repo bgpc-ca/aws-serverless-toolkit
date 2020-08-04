@@ -1,4 +1,4 @@
-import { MockDocumentClient } from "../../../../lib";
+import { MockDocumentClient } from "../../../../lib/providers";
 import { DynamoDB } from "aws-sdk";
 describe("MockDocumentClient", () => {
   const mockDocumentClient = new MockDocumentClient();

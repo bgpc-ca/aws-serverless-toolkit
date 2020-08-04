@@ -1,4 +1,4 @@
-import { LocalDocumentClient, TableConfigs } from "../../../../lib";
+import { LocalDocumentClient, TableConfigs } from "../../../../lib/providers";
 
 describe("LocalDocumentClient", () => {
   const tableConfigs: TableConfigs = {
