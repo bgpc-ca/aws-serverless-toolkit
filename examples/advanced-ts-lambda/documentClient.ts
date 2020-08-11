@@ -1,5 +1,5 @@
 import { DynamoDB } from "aws-sdk";
-import { LocalDocumentClient, MockDocumentClient, TableConfigs } from "../../lib";
+import { LocalDocumentClient, MockDocumentClient, TableConfigs } from "../../lib/providers";
 
 const tableConfigs: TableConfigs = {
   MyTable: {
