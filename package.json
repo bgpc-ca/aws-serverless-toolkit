@@ -1,6 +1,6 @@
 {
   "name": "@bgpc/aws-serverless-toolkit",
-  "version": "1.1.1-rc.2-patch04",
+  "version": "1.1.1-rc.2-patch05",
   "contributors": [
     "Jeremi Gendron <gendronjeremi@gmail.com>",
     "Joseph Sawaya"
@@ -50,8 +50,8 @@
   },
   "dependencies": {
     "aws-sdk": "^2.713.0",
-    "express": "^4.17.1",
     "axios": "^0.19.2",
+    "express": "^4.17.1",
     "uuid": "^8.2.0"
   }
 }
