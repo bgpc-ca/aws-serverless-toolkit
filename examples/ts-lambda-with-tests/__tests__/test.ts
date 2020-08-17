@@ -1,6 +1,6 @@
 import { call, handler } from "../index";
 import { documentClient, tableConfigs } from "../documentClient";
-import { ApiGatewayLocalClient } from "../../../dist/providers/index";
+import { ApiGatewayLocalClient } from "../../../lib/providers/index";
 
 describe("should bruh", () => {
   it("should bruh", async () => {

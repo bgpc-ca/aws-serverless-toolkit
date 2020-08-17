@@ -9,7 +9,7 @@ import {
   success,
   makePost,
   ApiGatewayBusinessResponseBody,
-} from "../../dist";
+} from "../../lib";
 import { documentClient, tableConfigs } from "./documentClient";
 
 const baseUrl = "http://localhost:3002";
