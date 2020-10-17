@@ -49,6 +49,17 @@ export class LocalDocumentClient {
     };
   }
 
+  batchWrite(
+    params: DynamoDB.DocumentClient.BatchWriteInput,
+  ): OneRequired<Request<DynamoDB.DocumentClient.BatchWriteItemOutput, AWSError>, "promise"> {
+    return {
+      promise: async () => {
+        await this.createMultipleTables(Object.keys(params.RequestItems));
+        return this.documentClient.batchWrite(params).promise()
+      }
+    }
+  }
+
   put(
     params: DynamoDB.DocumentClient.PutItemInput,
   ): OneRequired<Request<DynamoDB.DocumentClient.PutItemOutput, AWSError>, "promise"> {
