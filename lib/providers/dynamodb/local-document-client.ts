@@ -50,14 +50,14 @@ export class LocalDocumentClient {
   }
 
   batchWrite(
-    params: DynamoDB.DocumentClient.BatchWriteInput,
+    params: DynamoDB.DocumentClient.BatchWriteItemInput,
   ): OneRequired<Request<DynamoDB.DocumentClient.BatchWriteItemOutput, AWSError>, "promise"> {
     return {
       promise: async () => {
         await this.createMultipleTables(Object.keys(params.RequestItems));
-        return this.documentClient.batchWrite(params).promise()
-      }
-    }
+        return this.documentClient.batchWrite(params).promise();
+      },
+    };
   }
 
   put(
