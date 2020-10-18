@@ -104,6 +104,17 @@ export class LocalDocumentClient {
     };
   }
 
+  delete(
+    params: DynamoDB.DocumentClient.DeleteItemInput,
+  ): OneRequired<Request<DynamoDB.DocumentClient.DeleteItemOutput, AWSError>, "promise"> {
+    return {
+      promise: async () => {
+        await this.createTable(params.TableName);
+        return this.documentClient.delete(params).promise();
+      },
+    };
+  }
+
   async createMultipleTables(tableNames: string[]): Promise<void> {
     await Promise.all(tableNames.map((tableName) => this.createTable(tableName)));
   }
