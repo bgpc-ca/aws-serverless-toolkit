@@ -26,8 +26,7 @@ describe("sample test", () => {
         fn: testFn,
       },
     };
-    const api = new ApiGatewayLocalClient(fnMap);
-    api.init(8080);
+    const api = new ApiGatewayLocalClient(fnMap, 8080);
     const response = await axios.get("http://localhost:8080/home");
     expect(response.data?.bruh).toBe("bruh");
     expect(response.status).toBe(200);

@@ -7,7 +7,8 @@ import {
   ApiGatewayResponse,
   MultiValueHttpHeaders,
 } from "../../types/aws/api-gateway";
-import bodyParser from "body-parser";
+import { json } from "body-parser";
+import cors from "cors";
 import { Http2Server } from "http2";
 
 type methodType = "get" | "post" | "put" | "delete";
@@ -31,10 +32,11 @@ export class ApiGatewayLocalClient {
   app: Express;
   functionMap: FunctionMapType;
   server?: Http2Server;
-  constructor(functionMap: FunctionMapType) {
+  constructor(functionMap: FunctionMapType, port = 8099) {
     this.functionMap = functionMap;
     this.app = express();
-    this.app.use(bodyParser.json());
+    this.app.use(cors());
+    this.app.use(json());
     for (const path in this.functionMap) {
       this.app[this.functionMap[path].method](path, async (req: BetterRequest, res: BetterResponse) => {
         const event = this.generateEvent(req, path);
@@ -49,8 +51,6 @@ export class ApiGatewayLocalClient {
         }
       });
     }
-  }
-  init(port: number): void {
     this.server = this.app.listen(port);
   }
   extractRequestJuice(req: BetterRequest): RExtractRequestJuice {

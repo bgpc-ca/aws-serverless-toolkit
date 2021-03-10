@@ -4,13 +4,15 @@ import { ApiGatewayLocalClient } from "../../../lib/providers/index";
 
 describe("should bruh", () => {
   it("should bruh", async () => {
-    const api = new ApiGatewayLocalClient({
-      "/test-fn": {
-        fn: handler,
-        method: "post",
+    const api = new ApiGatewayLocalClient(
+      {
+        "/test-fn": {
+          fn: handler,
+          method: "post",
+        },
       },
-    });
-    api.init(3002);
+      3002,
+    );
     const email = "test@gmail.com";
     const response = await call({
       email,

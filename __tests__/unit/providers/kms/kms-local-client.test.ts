@@ -7,7 +7,6 @@ describe("KMSLocalClient tests", () => {
     // expect(result.CiphertextBlob).toBeInstanceOf(String);
     if (typeof result.CiphertextBlob !== "string") throw new Error();
     const decrypted = await kms.decrypt({ CiphertextBlob: result.CiphertextBlob, KeyId: "test" }).promise();
-    console.log(decrypted.Plaintext);
     expect(decrypted.Plaintext).toBe("test");
   });
 });
